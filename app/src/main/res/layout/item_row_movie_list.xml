@@ -4,13 +4,14 @@
     android:id="@+id/movie_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/dimen_2_dp"
-    android:layout_marginTop="@dimen/dimen_2_dp"
+    android:layout_marginBottom="@dimen/dimen_8_dp"
+    android:layout_marginTop="@dimen/dimen_8_dp"
     android:elevation="@dimen/dimen_3_dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_8_dp"
         android:orientation="vertical">
 
         <TextView
@@ -20,7 +21,7 @@
             android:layout_marginBottom="@dimen/dimen_8_dp"
             android:layout_marginLeft="@dimen/dimen_8_dp"
             android:layout_marginRight="@dimen/dimen_8_dp"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/secondary_color"
             android:textSize="@dimen/text_14_sp"
             android:textStyle="italic" />
 
@@ -30,8 +31,8 @@
             android:layout_height="@dimen/dimen_100_dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/dimen_8_dp"
+            android:layout_marginTop="@dimen/dimen_4_dp"
             fresco:placeholderImage="@android:drawable/ic_menu_gallery" />
-
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

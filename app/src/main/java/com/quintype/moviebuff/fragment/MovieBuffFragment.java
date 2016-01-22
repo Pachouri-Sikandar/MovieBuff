@@ -55,6 +55,8 @@ public class MovieBuffFragment extends Fragment implements MovieListAdapter.OnMo
     protected TextView textViewTitle;
     @InjectView(R.id.image_view_movie_cover)
     protected SimpleDraweeView imageViewMoviePoster;
+    @InjectView(R.id.layout_recent_search)
+    protected RelativeLayout layoutRecentSearch;
 
 
     private static final String TAG = MovieBuffFragment.class.getSimpleName();
@@ -109,8 +111,11 @@ public class MovieBuffFragment extends Fragment implements MovieListAdapter.OnMo
                     if (movieTitle.isEmpty() || movieTitle.equals("")) {
                         ((BaseActivity) getActivity()).showSnackBar(getActivity(), viewSnackBar, getResources().getString(R.string.enter_title));
                     } else {
-                        utils.fetchMoviesFromApi(getActivity(), movieTitle);
-                        setAdapter();
+                        if (progressBar != null && getActivity() != null) {
+                            progressBar.setVisibility(View.VISIBLE);
+                            utils.fetchMoviesFromApi(getActivity(), movieTitle);
+                        }
+
                         isSearchPerformed = true;
                     }
                     return true;
@@ -132,24 +137,30 @@ public class MovieBuffFragment extends Fragment implements MovieListAdapter.OnMo
                 manager.setOrientation(LinearLayoutManager.VERTICAL);
                 listViewMovies.setLayoutManager(manager);
                 listViewMovies.setAdapter(adapter);
-            }
+            }//
+            progressBar.setVisibility(View.GONE);
         }
     }
 
     private void fetchMoviesFromDatabase() {
+        if (progressBar != null) {
+            ArrayList<MovieResponseParser> movieResponseParsers = MovieDetailsModel.fetchRecentSearch();
 
-        ArrayList<MovieResponseParser> movieResponseParsers = MovieDetailsModel.fetchRecentSearch();
+            if (movieResponseParsers != null && !movieResponseParsers.isEmpty()) {
+                movieParserList.clear();
+                movieParserList.addAll(movieResponseParsers);
+                setAdapter();
+            } else {
+                if (progressBar != null)
+                    progressBar.setVisibility(View.GONE);
+            }
+            if (isSearchPerformed) {
+                setValuesInCurrentSearch(movieResponseParsers);
+            } else {
+                hideCurrentSearchHeader();
+            }
+        }
 
-        if (movieResponseParsers != null && !movieResponseParsers.isEmpty()) {
-            movieParserList.clear();
-            movieParserList.addAll(movieResponseParsers);
-            setAdapter();
-        }
-        if (isSearchPerformed) {
-            setValuesInCurrentSearch(movieResponseParsers);
-        } else {
-            hideCurrentSearchHeader();
-        }
 
     }
 
@@ -185,12 +196,14 @@ public class MovieBuffFragment extends Fragment implements MovieListAdapter.OnMo
         textViewHeaderRecentSearch.setVisibility(View.GONE);
         textViewTitle.setVisibility(View.GONE);
         imageViewMoviePoster.setVisibility(View.GONE);
+        layoutRecentSearch.setVisibility(View.GONE);
     }
 
     private void showCurrentSearchHeader() {
         textViewHeaderRecentSearch.setVisibility(View.VISIBLE);
         textViewTitle.setVisibility(View.VISIBLE);
         imageViewMoviePoster.setVisibility(View.VISIBLE);
+        layoutRecentSearch.setVisibility(View.VISIBLE);
     }
 
     @OnClick(R.id.layout_recent_search)

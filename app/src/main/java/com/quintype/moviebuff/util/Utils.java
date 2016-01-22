@@ -8,6 +8,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ProgressBar;
 
 import com.google.gson.Gson;
 import com.quintype.moviebuff.BaseApplication;
@@ -28,6 +29,7 @@ import retrofit.client.Response;
  * Created by pachouri on 21/1/16.
  */
 public class Utils {
+
     private static final String TAG = Utils.class.getSimpleName();
     public static final String ACTION_DONE = "Utils#ACTION_DONE";
     public static final String INTENT_BROAD_CAST = "intent_broad_cast";
