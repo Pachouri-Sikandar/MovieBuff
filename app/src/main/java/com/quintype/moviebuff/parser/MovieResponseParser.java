@@ -70,7 +70,7 @@ public class MovieResponseParser {
         this.Language = movieDetailsModel.getLanguage();
         this.Country = movieDetailsModel.getCountry();
         this.Awards = movieDetailsModel.getAwards();
-        this.Poster = movieDetailsModel.getAwards();
+        this.Poster = movieDetailsModel.getPoster();
         this.Metascore = movieDetailsModel.getMetaScore();
         this.imdbRating = movieDetailsModel.getImdbRating();
         this.imdbVotes = movieDetailsModel.getImdbVotes();

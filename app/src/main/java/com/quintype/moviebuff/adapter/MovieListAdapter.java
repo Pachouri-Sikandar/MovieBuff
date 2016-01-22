@@ -1,5 +1,6 @@
 package com.quintype.moviebuff.adapter;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.CardView;
@@ -8,14 +9,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.quintype.moviebuff.R;
 import com.quintype.moviebuff.parser.MovieResponseParser;
 import com.quintype.moviebuff.util.Utils;
+import com.squareup.picasso.Picasso;
 
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 /**
@@ -60,16 +63,19 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         if (holder instanceof HeaderViewHolder) {
-            Log.v("Adapter", "within header");
+//            Log.v("Adapter", "within header");
             HeaderViewHolder headerViewHolder = (HeaderViewHolder) holder;
             headerViewHolder.textViewHeader.setText(Utils.PREVIOUS_SEARCH);
         } else if (holder instanceof ChildItemsViewHolder) {
-            Log.v("Adapter", "within child");
+//            Log.v("Adapter", "within child");
             ChildItemsViewHolder childItemsViewHolder = (ChildItemsViewHolder) holder;
             MovieResponseParser movieParseObj = getItem(position - 1);
             childItemsViewHolder.textViewMovieTitle.setText(movieParseObj.getTitle());
-            Uri uri = Uri.parse(movieParseObj.getPoster());
-            childItemsViewHolder.imageViewMovieCover.setImageURI(uri);
+
+            Log.v("Adapter: ", "ImageUrl: " + movieParseObj.getPoster());
+
+            Picasso.with(context).load(movieParseObj.getPoster()).placeholder(android.R.drawable.ic_menu_gallery).error(android.R
+                    .drawable.ic_menu_close_clear_cancel).fit().centerCrop().into(childItemsViewHolder.imageViewMovieCover);
         }
     }
 
@@ -97,13 +103,13 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public static class ChildItemsViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewMovieTitle;
-        public SimpleDraweeView imageViewMovieCover;
+        public ImageView imageViewMovieCover;
         public CardView cardView;
 
         public ChildItemsViewHolder(View itemView) {
             super(itemView);
             textViewMovieTitle = (TextView) itemView.findViewById(R.id.text_view_movie_title);
-            imageViewMovieCover = (SimpleDraweeView) itemView.findViewById(R.id.image_view_movie_cover);
+            imageViewMovieCover = (ImageView) itemView.findViewById(R.id.image_view_movie_cover);
             cardView = (CardView) itemView.findViewById(R.id.movie_card_view);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

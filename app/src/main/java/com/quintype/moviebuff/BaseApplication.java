@@ -3,7 +3,6 @@ package com.quintype.moviebuff;
 import android.app.Application;
 
 import com.activeandroid.ActiveAndroid;
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.quintype.moviebuff.service.AppService;
@@ -29,7 +28,6 @@ public class BaseApplication extends Application {
 
         restAdapter = initializeRestAdapter();
         service = initializeService();
-        initializeFresco();
     }
 
     private RestAdapter initializeRestAdapter() {
@@ -50,9 +48,5 @@ public class BaseApplication extends Application {
     public AppService initializeService() {
         service = restAdapter.create(AppService.class);
         return service;
-    }
-
-    public void initializeFresco() {
-        Fresco.initialize(getApplicationContext());
     }
 }

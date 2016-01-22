@@ -95,7 +95,7 @@ public class MovieDetailsModel extends Model {
         this.language = movieResponseParser.getLanguage();
         this.country = movieResponseParser.getCountry();
         this.awards = movieResponseParser.getAwards();
-        this.poster = movieResponseParser.getAwards();
+        this.poster = movieResponseParser.getPoster();
         this.metaScore = movieResponseParser.getMetascore();
         this.imdbRating = movieResponseParser.getImdbRating();
         this.imdbVotes = movieResponseParser.getImdbVotes();

@@ -9,13 +9,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.activeandroid.query.Select;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.quintype.moviebuff.R;
 import com.quintype.moviebuff.model.MovieDetailsModel;
 import com.quintype.moviebuff.parser.MovieResponseParser;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ import butterknife.InjectView;
 public class MovieDetailsFragment extends Fragment {
 
     @InjectView(R.id.image_view_movie_cover)
-    protected SimpleDraweeView imageViewMovieCover;
+    protected ImageView imageViewMovieCover;
     @InjectView(R.id.text_view_movie_title)
     protected TextView textViewTitle;
     @InjectView(R.id.text_view_plot)
@@ -108,8 +109,10 @@ public class MovieDetailsFragment extends Fragment {
         textViewActor.setText(actors);
         textViewPlot.setText(plot);
         textViewRating.setText(imdbRating);
-        Uri uri = Uri.parse(poster);
-        imageViewMovieCover.setImageURI(uri);
+
+        Picasso.with(context).load(poster).placeholder(android.R.drawable.ic_menu_gallery).error(android.R
+                .drawable.ic_menu_close_clear_cancel).fit().centerCrop().into(imageViewMovieCover);
+
     }
 
 

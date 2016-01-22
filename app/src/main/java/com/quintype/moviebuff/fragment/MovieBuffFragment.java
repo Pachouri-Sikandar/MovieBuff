@@ -19,11 +19,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.quintype.moviebuff.R;
 import com.quintype.moviebuff.activity.BaseActivity;
 import com.quintype.moviebuff.activity.MovieBuffActivity;
@@ -31,6 +31,7 @@ import com.quintype.moviebuff.adapter.MovieListAdapter;
 import com.quintype.moviebuff.model.MovieDetailsModel;
 import com.quintype.moviebuff.parser.MovieResponseParser;
 import com.quintype.moviebuff.util.Utils;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -54,7 +55,7 @@ public class MovieBuffFragment extends Fragment implements MovieListAdapter.OnMo
     @InjectView(R.id.text_view_movie_title)
     protected TextView textViewTitle;
     @InjectView(R.id.image_view_movie_cover)
-    protected SimpleDraweeView imageViewMoviePoster;
+    protected ImageView imageViewMoviePoster;
     @InjectView(R.id.layout_recent_search)
     protected RelativeLayout layoutRecentSearch;
 
@@ -170,8 +171,9 @@ public class MovieBuffFragment extends Fragment implements MovieListAdapter.OnMo
                 showCurrentSearchHeader();
                 textViewHeaderRecentSearch.setText(Utils.RECENT_SEARCH);
                 textViewTitle.setText(movieResponseParsers.get(0).getTitle());
-                Uri uri = Uri.parse(movieResponseParsers.get(0).getPoster());
-                imageViewMoviePoster.setImageURI(uri);
+                Picasso.with(context).load(movieResponseParsers.get(0).getPoster()).placeholder(android.R.drawable.ic_menu_gallery).error(android.R
+                        .drawable.ic_menu_close_clear_cancel).fit().centerCrop().into(imageViewMoviePoster);
+
             } else {
                 hideCurrentSearchHeader();
                 textViewHeaderRecentSearch.setVisibility(View.VISIBLE);
