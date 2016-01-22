@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/dimen_4_dp">
+
+    <EditText
+        android:id="@+id/edit_text_movie_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_search_movie"
+        android:imeOptions="actionSearch"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/text_view_header_recent_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_text_movie_name"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_14_sp" />
+
+    <RelativeLayout
+        android:id="@+id/layout_recent_search"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_view_header_recent_search">
+
+        <include
+            android:id="@+id/recent_search"
+            layout="@layout/item_row_movie_list" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list_view_movie"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layout_recent_search"
+        android:layout_marginLeft="@dimen/dimen_8_dp"
+        android:layout_marginRight="@dimen/dimen_8_dp"
+        android:background="@color/white"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingBottom="@dimen/dimen_4_dp"
+        android:paddingTop="@dimen/dimen_4_dp" />
+
+    <ProgressBar
+        android:id="@+id/progress_view"
+        style="?android:attr/progressBarStyleInverse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+</RelativeLayout>

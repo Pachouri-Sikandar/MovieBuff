@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">MovieBuff</string>
+    <string name="network_error">Please connect to network and try again.</string>
+    <string name="error_message">Some error occurred. Please try again.</string>
+    <string name="title_activity_movie_buff">MovieBuffActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="hint_search_movie">Search Movie</string>
+    <string name="not_found">Sorry! Searched movie not found</string>
+    <string name="enter_title">Please enter movie title</string>
+
+    <string name="movie_title">Title</string>
+    <string name="movie_release">Released</string>
+    <string name="movie_genre">Genre</string>
+    <string name="movie_director">Director</string>
+    <string name="movie_writer">Writer</string>
+    <string name="movie_actors">Actors</string>
+    <string name="movie_plot">Plot</string>
+    <string name="movie_imdb">IMDB Rating</string>
+</resources>
